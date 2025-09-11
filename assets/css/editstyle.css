@@ -1,0 +1,213 @@
+#chart-container {
+    height: 500px;
+}
+.orgchart.edit-state .edge {
+    display: none;
+}
+.orgchart .nodes {
+    display: flex !important;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.orgchart .node {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 180px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    margin: 0 10px 20px 10px;
+    position: relative;
+}
+.orgchart .node:first-of-type {
+    width: 160px !important;
+    min-width: unset;
+    flex-grow: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.orgchart .node .title {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 5px;
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.orgchart .node .ip-address-view {
+    background-color: white;
+    color: black;
+    font-size: 0.85rem;
+    padding: 4px 5px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    user-select: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.orgchart .node > .edge {
+    cursor: pointer;
+    pointer-events: auto;
+}
+.orgchart:not(.edit-state) .node > .edge {
+    display: inline-block !important;
+}
+.orgchart .node .toggle-arrow {
+    cursor: pointer;
+}
+#edit-panel {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+}
+#edit-panel .btn-inputs {
+    width: 2rem;
+    padding: 0;
+    font-size: 1.5rem;
+}
+#edit-panel .btn-inputs {
+    vertical-align: sub;
+}
+#edit-panel.edit-parent-node .btn-inputs {
+    display: none;
+}
+#edit-panel.edit-state > :not(#chart-state-panel) {
+    display: none;
+}
+#edit-panel label {
+    font-weight: bold;
+}
+#edit-panel.edit-parent-node .selected-node-group {
+    display: none;
+}
+#chart-state-panel,
+#selected-node,
+#btn-remove-input {
+    margin-right: 1rem;
+}
+#edit-panel button,
+#edit-panel input {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+#edit-panel.edit-parent-node button:not(#btn-add-nodes) {
+    display: none;
+}
+#new-nodelist {
+    display: inline-block;
+    list-style: none;
+    margin-top: -0.5rem;
+    padding: 0;
+    vertical-align: text-top;
+}
+#new-nodelist > * {
+    padding-bottom: 4px;
+}
+#new-nodelist li {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+#new-nodelist li input.new-node,
+#new-nodelist li input.new-ip {
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    flex: 1;
+    box-sizing: border-box;
+}
+#new-nodelist li label {
+    font-size: 0.85rem;
+    min-width: 25px;
+    display: inline-block;
+}
+.radio-panel input[type="radio"] {
+    height: 1.25rem;
+    width: 1.25rem;
+    vertical-align: text-bottom;
+}
+#btn-add-nodes {
+    margin-left: 20px;
+}
+#ch-container {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+}
+#ch-mode-panel {
+    margin: 0 10px 10px 0;
+    font-weight: bold;
+}
+#node-info {
+    margin-left: 5px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+#node-info label,
+#node-info input {
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+#node-info input {
+    padding: 0.3rem 0.5rem;
+    width: 180px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+#ch-list {
+    margin: 0 10px 20px 5px;
+    padding: 0;
+    list-style: none;
+}
+#ch-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+#ch-list label {
+    min-width: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+#ch-list input[type="text"],
+#ch-list select,
+#ch-list span {
+    flex: 1 1 120px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+#ch-list span {
+    border: none;
+    padding-left: 0;
+    background: transparent;
+    line-height: 1.7em;
+}
+#btn-update-ch {
+    margin-left: 5px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border: 1px solid #333;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+#btn-update-ch:hover {
+    background-color: #ddd;
+}
