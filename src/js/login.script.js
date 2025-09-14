@@ -43,7 +43,7 @@ $(document).ready(function () {
         $button.html('<span class="loading"></span>Logging in...');
 
         $.ajax({
-            url: API_CONFIG.AUTH_API.BASE_URL + API_CONFIG.AUTH_API.LOGIN_ENDPOINT,
+            url: ENV.getAuthApiUrl() + API_CONFIG.AUTH_API.LOGIN_ENDPOINT,
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
