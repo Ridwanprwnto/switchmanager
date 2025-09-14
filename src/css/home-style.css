@@ -1,0 +1,517 @@
+/* === FIXED NAVBAR & FOOTER + SCROLLABLE CONTENT === */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* wrapper untuk konten scrollable */
+.content-wrapper {
+    flex: 1;
+    margin-top: 60px; /* sesuai tinggi navbar */
+    margin-bottom: 36px; /* beri space untuk footer */
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+/* === NAVBAR === */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(217, 83, 79, 0.8);
+    color: #fff;
+    height: 40px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+#navbar .app-name {
+    font-size: 18px;
+}
+
+#navbar .user-menu {
+    position: relative;
+    cursor: pointer;
+}
+
+#navbar .user-menu span {
+    font-size: 14px;
+}
+
+#logout-menu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: rgba(217, 83, 79, 0.8);
+    border-radius: 1px;
+    display: none;
+    z-index: 1000;
+    min-width: 120px;
+}
+
+#logout-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#logout-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+}
+
+#logout-menu li:hover {
+    background: #d65f5f;
+}
+
+/* Loading Overlay Styles */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: none;
+}
+
+.loading-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Data Management Panel Styles */
+#data-management-panel {
+    border: 1px solid #aaa;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.data-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.data-buttons button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #333;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#btn-refresh-data:hover {
+    background-color: #ddd;
+}
+
+#btn-export-data:hover {
+    background-color: #ddd;
+}
+
+#btn-import-data:hover {
+    background-color: #ddd;
+}
+
+#btn-download-backup:hover {
+    background-color: #ddd;
+}
+
+#btn-manual-save:hover {
+    background-color: #ddd;
+}
+#btn-print-pdf:hover {
+    background-color: #ddd;
+}
+
+/* Status Panel Styles */
+.status-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    font-size: 12px;
+    color: #666;
+    min-width: 200px;
+}
+
+#refresh-countdown {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+#auto-save-status {
+    white-space: nowrap;
+}
+
+/* Connection Status */
+.connection-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.connection-status.online {
+    background: #d4edda;
+    color: #155724;
+}
+
+.connection-status.offline {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* === CHART CONTAINER STYLES === */
+#chart-container {
+    position: relative;
+    height: 500px;
+    /* border: 1px solid #aaa; */
+    margin: 0.5rem;
+    overflow: auto;
+    text-align: center;
+}
+
+/* === ORGCHART NODE STYLES === */
+.orgchart.edit-state .edge {
+    display: none;
+}
+.orgchart .nodes {
+    display: flex !important;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.orgchart .node {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 180px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    margin: 0 10px 20px 10px;
+    position: relative;
+}
+.orgchart .node:first-of-type {
+    width: 160px !important;
+    min-width: unset;
+    flex-grow: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.orgchart .node .title {
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 5px;
+    border-radius: 4px 4px 0 0;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.orgchart .node .ip-address-view {
+    background-color: white;
+    color: black;
+    font-size: 0.85rem;
+    padding: 4px 5px;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    user-select: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.orgchart .node > .edge {
+    cursor: pointer;
+    pointer-events: auto;
+}
+.orgchart:not(.edit-state) .node > .edge {
+    display: inline-block !important;
+}
+.orgchart .node .toggle-arrow {
+    cursor: pointer;
+}
+
+/* === VALIDATION STYLES === */
+/* Message Styles */
+.success-message,
+.error-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.input-error {
+    border: 2px solid #e74c3c !important;
+    background-color: #fdf2f2 !important;
+}
+
+/* === EDIT PANEL STYLES === */
+#edit-panel {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+}
+#edit-panel.edit-parent-node .btn-inputs {
+    display: none;
+}
+#edit-panel.edit-state > :not(#chart-state-panel) {
+    display: none;
+}
+#edit-panel label {
+    font-weight: bold;
+}
+#edit-panel.edit-parent-node .selected-node-group {
+    display: none;
+}
+#chart-state-panel,
+#selected-node,
+#btn-remove-input {
+    margin-right: 1rem;
+}
+#edit-panel button,
+#edit-panel input {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+#edit-panel.edit-parent-node button:not(#btn-add-nodes) {
+    display: none;
+}
+#new-nodelist {
+    display: inline-block;
+    list-style: none;
+    margin-top: -0.5rem;
+    padding: 0;
+    vertical-align: text-top;
+}
+#new-nodelist > * {
+    padding-bottom: 4px;
+}
+#new-nodelist li {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+#new-nodelist li label {
+    font-size: 0.85rem;
+    min-width: 25px;
+    display: inline-block;
+}
+.radio-panel input[type="radio"] {
+    height: 1.25rem;
+    width: 1.25rem;
+    vertical-align: text-bottom;
+}
+#btn-add-nodes {
+    margin-left: 20px;
+}
+
+/* === CH CONTAINER STYLES === */
+#ch-container {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #aaa;
+    position: relative;
+}
+#ch-mode-panel {
+    margin: 0 10px 20px 0;
+    font-weight: bold;
+}
+#node-info {
+    margin-left: 5px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+#node-info label,
+#node-info input {
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+#node-info input {
+    padding: 0.5rem;
+    width: 180px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+#ch-list {
+    margin: 0 10px 20px 5px;
+    padding: 0;
+    list-style: none;
+}
+#ch-list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+#ch-list label {
+    min-width: 50px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+#ch-list input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+#ch-list input[type="text"],
+#ch-list select,
+#ch-list span {
+    flex: 1 1 120px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+#ch-list span {
+    border: none;
+    padding-left: 0;
+    background: transparent;
+    line-height: 1.7em;
+}
+#btn-update-ch {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #333;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+#btn-update-ch:hover {
+    background-color: #ddd;
+}
+#ch-add-btn {
+    margin-left: 5px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 3px;
+    transition: background-color 0.2s ease-in-out;
+}
+#ch-add-btn:hover {
+    background-color: #ddd;
+}
+.ch-remove-btn {
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 3px;
+    user-select: none;
+    height: 26px;
+    align-self: center;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+.ch-remove-btn:hover {
+    background-color: #ddd;
+}
+
+/* === FOOTER === */
+#footer {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    z-index: 1000;
+}
+
+#footer .link {
+    color: rgba(217, 83, 79, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #data-management-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .status-panel {
+        align-items: flex-start;
+        text-align: left;
+        margin-top: 10px;
+    }
+}

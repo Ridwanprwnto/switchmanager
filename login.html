@@ -2,98 +2,39 @@
 <html lang="id">
     <head>
         <meta charset="UTF-8" />
-        <title>Login - Network Switch Manager</title>
-        <style>
-            body {
-                margin: 0;
-                font-family: Arial, sans-serif;
-                background: #ecf0f1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-
-            .login-container {
-                background: #fff;
-                padding: 30px;
-                border-radius: 2px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-                width: 320px;
-                text-align: center;
-            }
-
-            .login-container input,
-            .login-container button {
-                width: 100%;
-                box-sizing: border-box; /* biar padding+border dihitung ke dalam width */
-                padding: 10px;
-                margin: 8px 0;
-                border-radius: 4px;
-                font-size: 14px;
-            }
-
-            .login-container input {
-                border: 1px solid #ccc;
-            }
-
-            .login-container button {
-                background-color: rgba(217, 83, 79, 0.8);
-                color: #fff;
-                border: none;
-                font-size: 15px;
-                cursor: pointer;
-                margin-top: 12px;
-            }
-
-            .login-container button:hover {
-                background: #c74747;
-            }
-
-            .error {
-                color: red;
-                font-size: 13px;
-                margin-top: 5px;
-            }
-        </style>
+        <title>Login - Topology Network Manager</title>
+        <link rel="icon" href="assets/img/logo.png" />
+        <link rel="stylesheet" href="src/css/login-style.css" />
     </head>
     <body>
         <div class="login-container">
-            <h2>Network Switch Manager</h2>
-            <input type="text" id="username" placeholder="Username" />
-            <input type="password" id="password" placeholder="Password" />
-            <div class="error" id="error-msg"></div>
-            <button id="btn-login">Login</button>
+            <div class="login-header">
+                <h1>Topology Network Manager</h1>
+                <p>Please login to continue</p>
+            </div>
+
+            <div id="message-container"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required />
+                    <div class="error-message">Please enter your User ID</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required />
+                    <div class="error-message">Please enter your password</div>
+                </div>
+
+                <button type="submit" class="login-button" id="login-btn">Login</button>
+            </form>
+            <div id="developer" class="developer-link">&copy; 2024 Developed by <a href="https://ridwanpurwanto-blog.vercel.app" target="_blank" class="link">Purwanto Ridwan</a></div>
         </div>
-
-        <script>
-            // Demo: username=ADMIN, password=1234
-            document.getElementById("btn-login").addEventListener("click", function () {
-                const username = document.getElementById("username").value.trim();
-                const password = document.getElementById("password").value.trim();
-                const errorMsg = document.getElementById("error-msg");
-
-                errorMsg.textContent = "";
-
-                if (!username || !password) {
-                    errorMsg.textContent = "Username dan Password wajib diisi";
-                    return;
-                }
-
-                if (username.toUpperCase() === "ADMIN" && password === "1234") {
-                    localStorage.setItem("loggedInUser", username.toUpperCase());
-                    window.location.href = "index.html"; // halaman utama (chart)
-                } else {
-                    errorMsg.textContent = "Username atau Password salah";
-                }
-            });
-
-            // Enter key juga bisa login
-            document.addEventListener("keypress", function (e) {
-                if (e.key === "Enter") {
-                    document.getElementById("btn-login").click();
-                }
-            });
-        </script>
+        <script type="text/javascript" src="dist/js/jquery.min.js"></script>
+        <script type="text/javascript" src="src/js/config.js"></script>
+        <script type="text/javascript" src="src/js/login.script.js"></script>
+        <script></script>
     </body>
 </html>
