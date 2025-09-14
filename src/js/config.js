@@ -4,7 +4,7 @@
 const API_CONFIG = {
     // API untuk Authentication/Login (Port 4000)
     AUTH_API: {
-        BASE_URL: "http://localhost:4000/api-sobi",
+        BASE_URL: "http://192.168.33.146:8000/api-sobi",
         LOGIN_ENDPOINT: "/auth/users/login",
     },
 
@@ -87,17 +87,17 @@ const ENV = {
 
     getAuthApiUrl: () => {
         if (ENV.isDevelopment()) {
-            return API_CONFIG.AUTH_API.BASE_URL;
+            return window.location.origin + ":4000/api-sobi";
         } else {
-            return window.location.origin + "/api-auth";
+            return API_CONFIG.AUTH_API.BASE_URL;
         }
     },
 
     getSwitchApiUrl: () => {
         if (ENV.isDevelopment()) {
-            return API_CONFIG.SWITCH_API.BASE_URL;
+            return window.location.origin + ":5000/api-snm";
         } else {
-            return window.location.origin + "/api-snm";
+            return API_CONFIG.SWITCH_API.BASE_URL;
         }
     },
 };
