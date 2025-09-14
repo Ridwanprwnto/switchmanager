@@ -10,7 +10,7 @@ const API_CONFIG = {
 
     // API untuk Switch Data Management (Port 5000)
     SWITCH_API: {
-        BASE_URL: "http://localhost:5000/api-snm",
+        BASE_URL: "http://192.168.33.156:5000/api-snm",
         ENDPOINTS: {
             SWITCH_DATA: "/switch",
             HEALTH: "/health",
