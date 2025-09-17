@@ -11,7 +11,7 @@ router.get("/health", optionalApiKey, (req, res) => {
         success: true,
         status: "OK",
         timestamp: new Date().toISOString(),
-        service: "Switch Network Management API",
+        service: "Topology Network Management API",
         version: "1.0.0",
         mongodb: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
         authenticated: req.authenticated || false,

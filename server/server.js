@@ -40,8 +40,8 @@ app.use(express.json({ limit: "10mb" }));
 app.use(requestLogger);
 
 // Routes
-app.use("/api-snm", healthRoutes);
-app.use("/api-snm", switchRoutes);
+app.use(process.env.API_PATH, healthRoutes);
+app.use(process.env.API_PATH, switchRoutes);
 
 // 404 handler
 app.use(notFoundHandler);
@@ -56,18 +56,18 @@ process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
 
 // Start server
 app.listen(PORT, () => {
-    console.log("=== Switch Network Management API ===");
+    console.log("=== Topology Network Management API ===");
     console.log(`Server running on port: ${PORT}`);
     console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
     console.log(`MongoDB URI: ${process.env.MONGODB_URI}`);
     console.log(`Available endpoints:`);
-    console.log(`- GET /api-snm/health`);
-    console.log(`- GET /api-snm/switch`);
-    console.log(`- POST /api-snm/switch`);
-    console.log(`- DELETE /api-snm/switch`);
-    console.log(`- GET /api-snm/status`);
-    console.log(`- POST /api-snm/backup`);
-    console.log(`- POST /api-snm/restore`);
+    console.log(`- GET ${process.env.API_PATH}/health`);
+    console.log(`- GET ${process.env.API_PATH}/switch`);
+    console.log(`- POST ${process.env.API_PATH}/switch`);
+    console.log(`- DELETE ${process.env.API_PATH}/switch`);
+    console.log(`- GET ${process.env.API_PATH}/status`);
+    console.log(`- POST ${process.env.API_PATH}/backup`);
+    console.log(`- POST ${process.env.API_PATH}/restore`);
     console.log(`========================================`);
 });
 

@@ -6,16 +6,6 @@ const authenticateApiKey = (req, res, next) => {
     const apiKey = req.headers[API_CONFIG.API_KEY_HEADER.toLowerCase()];
     const userId = req.headers[API_CONFIG.USER_ID_HEADER.toLowerCase()];
 
-    // Debug logging (remove in production)
-    if (process.env.NODE_ENV === "development") {
-        console.log("=== Authentication Debug ===");
-        console.log("Expected API Key:", API_CONFIG.API_KEY);
-        console.log("Received API Key:", apiKey || "Missing");
-        console.log("Expected User ID Header:", API_CONFIG.USER_ID_HEADER.toLowerCase());
-        console.log("Received User ID:", userId || "Missing");
-        console.log("===========================");
-    }
-
     if (!apiKey) {
         return res.status(401).json({
             success: false,
