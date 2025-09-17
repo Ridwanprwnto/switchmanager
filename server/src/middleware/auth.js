@@ -1,8 +1,25 @@
 // middleware/auth.js
 const API_CONFIG = require("../config/apiConfig");
 
-// API Key Authentication Middleware
 const authenticateApiKey = (req, res, next) => {
+    if (process.env.NODE_ENV === "production") {
+        // 🔹 Production: rely on Kong consumer
+        const user = req.headers["x-consumer-username"];
+
+        if (!user) {
+            return res.status(401).json({
+                status: "error",
+                message: "Akses tidak diizinkan. Consumer tidak terdeteksi.",
+                code: "CONSUMER_MISSING",
+            });
+        }
+
+        // Attach user info to request
+        req.user = { userId: user.trim() };
+        return next();
+    }
+
+    // 🔹 Development: manual API key validation
     const apiKey = req.headers[API_CONFIG.API_KEY_HEADER.toLowerCase()];
     const userId = req.headers[API_CONFIG.USER_ID_HEADER.toLowerCase()];
 
