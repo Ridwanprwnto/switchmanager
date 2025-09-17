@@ -8,7 +8,15 @@ const notFoundHandler = (req, res) => {
         error: "Endpoint tidak ditemukan",
         path: req.path,
         method: req.method,
-        availableEndpoints: ["GET /api-snm/health", "GET /api-snm/switch", "POST /api-snm/switch", "DELETE /api-snm/switch", "GET /api-snm/status", "POST /api-snm/backup", "POST /api-snm/restore"],
+        availableEndpoints: [
+            `GET ${process.env.API_PATH}/health`,
+            `GET ${process.env.API_PATH}/switch`,
+            `POST ${process.env.API_PATH}/switch`,
+            `DELETE ${process.env.API_PATH}/switch`,
+            `GET ${process.env.API_PATH}/status`,
+            `POST ${process.env.API_PATH}/backup`,
+            `POST ${process.env.API_PATH}/restore`,
+        ],
     });
 };
 

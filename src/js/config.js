@@ -1,16 +1,16 @@
-// config.js - Configuration file untuk Switch Management App (FIXED)
+// config.js - Configuration file untuk Topology Network Manager Webb App
 
 // API Configuration - Memisahkan Login API dan Switch Data API
 const API_CONFIG = {
-    // API untuk Authentication/Login (Port 4000)
+    // API untuk Authentication/Login
     AUTH_API: {
-        BASE_URL: "http://192.168.33.146:8000/api-sobi",
+        BASE_URL: "http://192.168.33.146:8000/api-ims",
         LOGIN_ENDPOINT: "/auth/users/login",
     },
 
-    // API untuk Switch Data Management (Port 5000)
+    // API untuk Switch Data Management
     SWITCH_API: {
-        BASE_URL: "http://192.168.33.156:5000/api-snm",
+        BASE_URL: "http://192.168.33.146:8000/api-topology",
         ENDPOINTS: {
             SWITCH_DATA: "/switch",
             HEALTH: "/health",
@@ -87,7 +87,7 @@ const ENV = {
 
     getAuthApiUrl: () => {
         if (ENV.isDevelopment()) {
-            return window.location.origin + ":4000/api-sobi";
+            return window.location.origin + ":4000/api-ims";
         } else {
             return API_CONFIG.AUTH_API.BASE_URL;
         }
@@ -95,7 +95,7 @@ const ENV = {
 
     getSwitchApiUrl: () => {
         if (ENV.isDevelopment()) {
-            return window.location.origin + ":5000/api-snm";
+            return window.location.origin + ":5000/api-topology";
         } else {
             return API_CONFIG.SWITCH_API.BASE_URL;
         }
